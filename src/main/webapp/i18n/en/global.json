@@ -13,6 +13,8 @@
                 "contactInfo": "Contact Info",
                 "customerCategory": "Customer Category",
                 "customer": "Customer",
+                "location": "Location",
+                "item": "Item",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

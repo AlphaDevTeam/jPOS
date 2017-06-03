@@ -1,0 +1,31 @@
+{
+    "jPosApp": {
+        "item" : {
+            "home": {
+                "title": "Items",
+                "createLabel": "Crear nuevo Item",
+                "createOrEditLabel": "Crear o editar Item",
+                "search": "Search for Item"
+            },
+            "created": "Un nuevo Item ha sido creado con el identificador {{ param }}",
+            "updated": "Un Item ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Item ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Item {{ id }}?"
+            },
+            "detail": {
+                "title": "Item"
+            },
+            "itemCode": "Item Code",
+            "itemTitle": "Item Title",
+            "itemBarcode": "Item Barcode",
+            "itemDescription": "Item Description",
+            "itemCost": "Item Cost",
+            "itemUnitPrice": "Item Unit Price",
+            "itemReorderLevel": "Item Reorder Level",
+            "relatedProduct": "Related Product",
+            "relatedDesign": "Related Design",
+            "itemLocation": "Item Location"
+        }
+    }
+}

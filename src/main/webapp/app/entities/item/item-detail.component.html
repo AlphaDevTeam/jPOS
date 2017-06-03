@@ -1,0 +1,67 @@
+
+<div *ngIf="item">
+    <h2><span jhiTranslate="jPosApp.item.detail.title">Item</span> {{item.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jPosApp.item.itemCode">Item Code</span></dt>
+        <dd>
+            <span>{{item.itemCode}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.item.itemTitle">Item Title</span></dt>
+        <dd>
+            <span>{{item.itemTitle}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.item.itemBarcode">Item Barcode</span></dt>
+        <dd>
+            <span>{{item.itemBarcode}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.item.itemDescription">Item Description</span></dt>
+        <dd>
+            <span>{{item.itemDescription}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.item.itemCost">Item Cost</span></dt>
+        <dd>
+            <span>{{item.itemCost}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.item.itemUnitPrice">Item Unit Price</span></dt>
+        <dd>
+            <span>{{item.itemUnitPrice}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.item.itemReorderLevel">Item Reorder Level</span></dt>
+        <dd>
+            <span>{{item.itemReorderLevel}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.item.relatedProduct">Related Product</span></dt>
+        <dd>
+            <div *ngIf="item.relatedProduct">
+                <a [routerLink]="['/product', item.relatedProduct?.id]">{{item.relatedProduct?.prodCode}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.item.relatedDesign">Related Design</span></dt>
+        <dd>
+            <div *ngIf="item.relatedDesign">
+                <a [routerLink]="['/design', item.relatedDesign?.id]">{{item.relatedDesign?.designCode}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.item.itemLocation">Item Location</span></dt>
+        <dd>
+            <div *ngIf="item.itemLocation">
+                <a [routerLink]="['/location', item.itemLocation?.id]">{{item.itemLocation?.locationCode}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'item/'+ item.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

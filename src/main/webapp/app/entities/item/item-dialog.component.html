@@ -1,0 +1,149 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myItemLabel" jhiTranslate="jPosApp.item.home.createOrEditLabel">Create or edit a Item</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!item.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="item.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.item.itemCode" for="field_itemCode">Item Code</label>
+            <input type="text" class="form-control" name="itemCode" id="field_itemCode"
+                [(ngModel)]="item.itemCode"
+            required />
+            <div [hidden]="!(editForm.controls.itemCode?.dirty && editForm.controls.itemCode?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.itemCode?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.item.itemTitle" for="field_itemTitle">Item Title</label>
+            <input type="text" class="form-control" name="itemTitle" id="field_itemTitle"
+                [(ngModel)]="item.itemTitle"
+            required maxlength="20" />
+            <div [hidden]="!(editForm.controls.itemTitle?.dirty && editForm.controls.itemTitle?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.itemTitle?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.itemTitle?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
+                   This field cannot be longer than 20 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.item.itemBarcode" for="field_itemBarcode">Item Barcode</label>
+            <input type="text" class="form-control" name="itemBarcode" id="field_itemBarcode"
+                [(ngModel)]="item.itemBarcode"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.item.itemDescription" for="field_itemDescription">Item Description</label>
+            <input type="text" class="form-control" name="itemDescription" id="field_itemDescription"
+                [(ngModel)]="item.itemDescription"
+            required maxlength="255" />
+            <div [hidden]="!(editForm.controls.itemDescription?.dirty && editForm.controls.itemDescription?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.itemDescription?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.itemDescription?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 255 }">
+                   This field cannot be longer than 255 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.item.itemCost" for="field_itemCost">Item Cost</label>
+            <input type="number" class="form-control" name="itemCost" id="field_itemCost"
+                [(ngModel)]="item.itemCost"
+            required />
+            <div [hidden]="!(editForm.controls.itemCost?.dirty && editForm.controls.itemCost?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.itemCost?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.itemCost?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.item.itemUnitPrice" for="field_itemUnitPrice">Item Unit Price</label>
+            <input type="number" class="form-control" name="itemUnitPrice" id="field_itemUnitPrice"
+                [(ngModel)]="item.itemUnitPrice"
+            required />
+            <div [hidden]="!(editForm.controls.itemUnitPrice?.dirty && editForm.controls.itemUnitPrice?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.itemUnitPrice?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.itemUnitPrice?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.item.itemReorderLevel" for="field_itemReorderLevel">Item Reorder Level</label>
+            <input type="number" class="form-control" name="itemReorderLevel" id="field_itemReorderLevel"
+                [(ngModel)]="item.itemReorderLevel"
+             />
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="jPosApp.item.relatedProduct" for="field_relatedProduct">Related Product</label>
+            <select class="form-control" id="field_relatedProduct" name="relatedProduct" [(ngModel)]="item.relatedProduct"  required>
+                <option [ngValue]="productOption.id === item.relatedProduct?.id ? item.relatedProduct : productOption" *ngFor="let productOption of products; trackBy: trackProductById">{{productOption.prodCode}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.relatedProduct?.dirty && editForm.controls.relatedProduct?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.relatedProduct?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="jPosApp.item.relatedDesign" for="field_relatedDesign">Related Design</label>
+            <select class="form-control" id="field_relatedDesign" name="relatedDesign" [(ngModel)]="item.relatedDesign"  required>
+                <option [ngValue]="designOption.id === item.relatedDesign?.id ? item.relatedDesign : designOption" *ngFor="let designOption of designs; trackBy: trackDesignById">{{designOption.designCode}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.relatedDesign?.dirty && editForm.controls.relatedDesign?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.relatedDesign?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="jPosApp.item.itemLocation" for="field_itemLocation">Item Location</label>
+            <select class="form-control" id="field_itemLocation" name="itemLocation" [(ngModel)]="item.itemLocation"  required>
+                <option [ngValue]="locationOption.id === item.itemLocation?.id ? item.itemLocation : locationOption" *ngFor="let locationOption of locations; trackBy: trackLocationById">{{locationOption.locationCode}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.itemLocation?.dirty && editForm.controls.itemLocation?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.itemLocation?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

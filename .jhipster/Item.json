@@ -1,0 +1,86 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "relatedProduct",
+            "otherEntityName": "product",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "prodCode"
+        },
+        {
+            "relationshipName": "relatedDesign",
+            "otherEntityName": "design",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "designCode"
+        },
+        {
+            "relationshipName": "itemLocation",
+            "otherEntityName": "location",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "locationCode"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "itemCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "itemTitle",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 20
+        },
+        {
+            "fieldName": "itemBarcode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "itemDescription",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "255"
+        },
+        {
+            "fieldName": "itemCost",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "itemUnitPrice",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "itemReorderLevel",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20170603200920",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "item",
+    "pagination": "pagination"
+}
