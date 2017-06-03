@@ -1,0 +1,67 @@
+
+<div *ngIf="customer">
+    <h2><span jhiTranslate="jPosApp.customer.detail.title">Customer</span> {{customer.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jPosApp.customer.firstName">First Name</span></dt>
+        <dd>
+            <span>{{customer.firstName}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.customer.lastName">Last Name</span></dt>
+        <dd>
+            <span>{{customer.lastName}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.customer.custCode">Cust Code</span></dt>
+        <dd>
+            <span>{{customer.custCode}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.customer.customerNIC">Customer NIC</span></dt>
+        <dd>
+            <span>{{customer.customerNIC}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.customer.creditLimit">Credit Limit</span></dt>
+        <dd>
+            <span>{{customer.creditLimit}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.customer.isActive">Is Active</span></dt>
+        <dd>
+            <span>{{customer.isActive}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.customer.vatNumber">Vat Number</span></dt>
+        <dd>
+            <span>{{customer.vatNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.customer.customerCategory">Customer Category</span></dt>
+        <dd>
+            <div *ngIf="customer.customerCategory">
+                <a [routerLink]="['/customer-category', customer.customerCategory?.id]">{{customer.customerCategory?.description}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.customer.address">Address</span></dt>
+        <dd>
+            <div *ngIf="customer.address">
+                <a [routerLink]="['/address', customer.address?.id]">{{customer.address?.address1}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.customer.contactInfo">Contact Info</span></dt>
+        <dd>
+            <div *ngIf="customer.contactInfo">
+                <a [routerLink]="['/contact-info', customer.contactInfo?.id]">{{customer.contactInfo?.mobileNumber}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'customer/'+ customer.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

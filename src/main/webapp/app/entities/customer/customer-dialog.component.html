@@ -1,0 +1,123 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCustomerLabel" jhiTranslate="jPosApp.customer.home.createOrEditLabel">Create or edit a Customer</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!customer.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="customer.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.customer.firstName" for="field_firstName">First Name</label>
+            <input type="text" class="form-control" name="firstName" id="field_firstName"
+                [(ngModel)]="customer.firstName"
+            required maxlength="20" />
+            <div [hidden]="!(editForm.controls.firstName?.dirty && editForm.controls.firstName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.firstName?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.firstName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
+                   This field cannot be longer than 20 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.customer.lastName" for="field_lastName">Last Name</label>
+            <input type="text" class="form-control" name="lastName" id="field_lastName"
+                [(ngModel)]="customer.lastName"
+            required maxlength="20" />
+            <div [hidden]="!(editForm.controls.lastName?.dirty && editForm.controls.lastName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lastName?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lastName?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
+                   This field cannot be longer than 20 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.customer.custCode" for="field_custCode">Cust Code</label>
+            <input type="text" class="form-control" name="custCode" id="field_custCode"
+                [(ngModel)]="customer.custCode"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.customer.customerNIC" for="field_customerNIC">Customer NIC</label>
+            <input type="text" class="form-control" name="customerNIC" id="field_customerNIC"
+                [(ngModel)]="customer.customerNIC"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.customer.creditLimit" for="field_creditLimit">Credit Limit</label>
+            <input type="number" class="form-control" name="creditLimit" id="field_creditLimit"
+                [(ngModel)]="customer.creditLimit"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.customer.isActive" for="field_isActive">Is Active</label>
+            <input type="checkbox" class="form-control" name="isActive" id="field_isActive"
+                [(ngModel)]="customer.isActive"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.customer.vatNumber" for="field_vatNumber">Vat Number</label>
+            <input type="text" class="form-control" name="vatNumber" id="field_vatNumber"
+                [(ngModel)]="customer.vatNumber"
+             />
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="jPosApp.customer.customerCategory" for="field_customerCategory">Customer Category</label>
+            <select class="form-control" id="field_customerCategory" name="customerCategory" [(ngModel)]="customer.customerCategory"  required>
+                <option [ngValue]="customerCategoryOption.id === customer.customerCategory?.id ? customer.customerCategory : customerCategoryOption" *ngFor="let customerCategoryOption of customercategories; trackBy: trackCustomerCategoryById">{{customerCategoryOption.description}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.customerCategory?.dirty && editForm.controls.customerCategory?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.customerCategory?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="jPosApp.customer.address" for="field_address">Address</label>
+            <select class="form-control" id="field_address" name="address" [(ngModel)]="customer.address"  required>
+                <option [ngValue]="addressOption.id === customer.address?.id ? customer.address : addressOption" *ngFor="let addressOption of addresses; trackBy: trackAddressById">{{addressOption.address1}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.address?.dirty && editForm.controls.address?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.address?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="jPosApp.customer.contactInfo" for="field_contactInfo">Contact Info</label>
+            <select class="form-control" id="field_contactInfo" name="contactInfo" [(ngModel)]="customer.contactInfo"  required>
+                <option [ngValue]="contactInfoOption.id === customer.contactInfo?.id ? customer.contactInfo : contactInfoOption" *ngFor="let contactInfoOption of contactinfos; trackBy: trackContactInfoById">{{contactInfoOption.mobileNumber}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.contactInfo?.dirty && editForm.controls.contactInfo?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.contactInfo?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

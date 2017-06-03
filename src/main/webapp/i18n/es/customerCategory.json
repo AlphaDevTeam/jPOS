@@ -1,0 +1,22 @@
+{
+    "jPosApp": {
+        "customerCategory" : {
+            "home": {
+                "title": "Customer Categories",
+                "createLabel": "Crear nuevo Customer Category",
+                "createOrEditLabel": "Crear o editar Customer Category",
+                "search": "Search for Customer Category"
+            },
+            "created": "Un nuevo Customer Category ha sido creado con el identificador {{ param }}",
+            "updated": "Un Customer Category ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Customer Category ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Customer Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Category"
+            },
+            "description": "Description"
+        }
+    }
+}

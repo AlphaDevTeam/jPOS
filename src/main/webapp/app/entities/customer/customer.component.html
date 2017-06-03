@@ -1,0 +1,107 @@
+<div>
+    <h2>
+        <span jhiTranslate="jPosApp.customer.home.title">Customers</span>
+        <button class="btn btn-primary float-right create-customer" [routerLink]="['/', { outlets: { popup: ['customer-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="jPosApp.customer.home.createLabel">
+            Create new Customer
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'jPosApp.customer.home.search' | translate }}">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="customers">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="firstName"><span jhiTranslate="jPosApp.customer.firstName">First Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="lastName"><span jhiTranslate="jPosApp.customer.lastName">Last Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="custCode"><span jhiTranslate="jPosApp.customer.custCode">Cust Code</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="customerNIC"><span jhiTranslate="jPosApp.customer.customerNIC">Customer NIC</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="creditLimit"><span jhiTranslate="jPosApp.customer.creditLimit">Credit Limit</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="isActive"><span jhiTranslate="jPosApp.customer.isActive">Is Active</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="vatNumber"><span jhiTranslate="jPosApp.customer.vatNumber">Vat Number</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="customerCategory.description"><span jhiTranslate="jPosApp.customer.customerCategory">Customer Category</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="address.address1"><span jhiTranslate="jPosApp.customer.address">Address</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="contactInfo.mobileNumber"><span jhiTranslate="jPosApp.customer.contactInfo">Contact Info</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let customer of customers ;trackBy: trackId">
+                <td><a [routerLink]="['../customer', customer.id ]">{{customer.id}}</a></td>
+                <td>{{customer.firstName}}</td>
+                <td>{{customer.lastName}}</td>
+                <td>{{customer.custCode}}</td>
+                <td>{{customer.customerNIC}}</td>
+                <td>{{customer.creditLimit}}</td>
+                <td>{{customer.isActive}}</td>
+                <td>{{customer.vatNumber}}</td>
+                <td>
+                    <div *ngIf="customer.customerCategory">
+                        <a [routerLink]="['../customer-category', customer.customerCategory?.id ]" >{{customer.customerCategory?.description}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="customer.address">
+                        <a [routerLink]="['../address', customer.address?.id ]" >{{customer.address?.address1}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="customer.contactInfo">
+                        <a [routerLink]="['../contact-info', customer.contactInfo?.id ]" >{{customer.contactInfo?.mobileNumber}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../customer', customer.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'customer/'+ customer.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'customer/'+ customer.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div *ngIf="customers && customers.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+</div>

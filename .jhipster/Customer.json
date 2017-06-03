@@ -1,0 +1,77 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "customerCategory",
+            "otherEntityName": "customerCategory",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "description"
+        },
+        {
+            "relationshipName": "address",
+            "otherEntityName": "address",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "address1"
+        },
+        {
+            "relationshipName": "contactInfo",
+            "otherEntityName": "contactInfo",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "mobileNumber"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "firstName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 20
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 20
+        },
+        {
+            "fieldName": "custCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "customerNIC",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "creditLimit",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "isActive",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "vatNumber",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170603170322",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "customer",
+    "pagination": "pagination"
+}
