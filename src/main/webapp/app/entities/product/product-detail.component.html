@@ -1,0 +1,37 @@
+
+<div *ngIf="product">
+    <h2><span jhiTranslate="jPosApp.product.detail.title">Product</span> {{product.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jPosApp.product.productDescription">Product Description</span></dt>
+        <dd>
+            <span>{{product.productDescription}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.product.prodCode">Prod Code</span></dt>
+        <dd>
+            <span>{{product.prodCode}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.product.profitPerc">Profit Perc</span></dt>
+        <dd>
+            <span>{{product.profitPerc}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.product.productPrefix">Product Prefix</span></dt>
+        <dd>
+            <span>{{product.productPrefix}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'product/'+ product.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,43 @@
+
+<div *ngIf="design">
+    <h2><span jhiTranslate="jPosApp.design.detail.title">Design</span> {{design.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jPosApp.design.designDescription">Design Description</span></dt>
+        <dd>
+            <span>{{design.designDescription}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.design.designCode">Design Code</span></dt>
+        <dd>
+            <span>{{design.designCode}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.design.profitPerc">Profit Perc</span></dt>
+        <dd>
+            <span>{{design.profitPerc}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.design.designPrefix">Design Prefix</span></dt>
+        <dd>
+            <span>{{design.designPrefix}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.design.relatedProduct">Related Product</span></dt>
+        <dd>
+            <div *ngIf="design.relatedProduct">
+                <a [routerLink]="['/product', design.relatedProduct?.id]">{{design.relatedProduct?.prodCode}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'design/'+ design.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

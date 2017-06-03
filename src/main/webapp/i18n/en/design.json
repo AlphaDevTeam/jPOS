@@ -1,0 +1,26 @@
+{
+    "jPosApp": {
+        "design" : {
+            "home": {
+                "title": "Designs",
+                "createLabel": "Create a new Design",
+                "createOrEditLabel": "Create or edit a Design",
+                "search": "Search for Design"
+            },
+            "created": "A new Design is created with identifier {{ param }}",
+            "updated": "A Design is updated with identifier {{ param }}",
+            "deleted": "A Design is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Design {{ id }}?"
+            },
+            "detail": {
+                "title": "Design"
+            },
+            "designDescription": "Design Description",
+            "designCode": "Design Code",
+            "profitPerc": "Profit Perc",
+            "designPrefix": "Design Prefix",
+            "relatedProduct": "Related Product"
+        }
+    }
+}

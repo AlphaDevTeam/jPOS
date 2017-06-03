@@ -1,0 +1,87 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myDesignLabel" jhiTranslate="jPosApp.design.home.createOrEditLabel">Create or edit a Design</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!design.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="design.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.design.designDescription" for="field_designDescription">Design Description</label>
+            <input type="text" class="form-control" name="designDescription" id="field_designDescription"
+                [(ngModel)]="design.designDescription"
+            required minlength="5" maxlength="55" />
+            <div [hidden]="!(editForm.controls.designDescription?.dirty && editForm.controls.designDescription?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.designDescription?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.designDescription?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 5 }">
+                   This field is required to be at least 5 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.designDescription?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 55 }">
+                   This field cannot be longer than 55 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.design.designCode" for="field_designCode">Design Code</label>
+            <input type="text" class="form-control" name="designCode" id="field_designCode"
+                [(ngModel)]="design.designCode"
+            required />
+            <div [hidden]="!(editForm.controls.designCode?.dirty && editForm.controls.designCode?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.designCode?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.design.profitPerc" for="field_profitPerc">Profit Perc</label>
+            <input type="number" class="form-control" name="profitPerc" id="field_profitPerc"
+                [(ngModel)]="design.profitPerc"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.design.designPrefix" for="field_designPrefix">Design Prefix</label>
+            <input type="text" class="form-control" name="designPrefix" id="field_designPrefix"
+                [(ngModel)]="design.designPrefix"
+            required />
+            <div [hidden]="!(editForm.controls.designPrefix?.dirty && editForm.controls.designPrefix?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.designPrefix?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="jPosApp.design.relatedProduct" for="field_relatedProduct">Related Product</label>
+            <select class="form-control" id="field_relatedProduct" name="relatedProduct" [(ngModel)]="design.relatedProduct"  required>
+                <option [ngValue]="productOption.id === design.relatedProduct?.id ? design.relatedProduct : productOption" *ngFor="let productOption of products; trackBy: trackProductById">{{productOption.prodCode}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.relatedProduct?.dirty && editForm.controls.relatedProduct?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.relatedProduct?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

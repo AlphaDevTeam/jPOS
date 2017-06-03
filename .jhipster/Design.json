@@ -1,0 +1,50 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "relatedProduct",
+            "otherEntityName": "product",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "prodCode"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "designDescription",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "5",
+            "fieldValidateRulesMaxlength": "55"
+        },
+        {
+            "fieldName": "designCode",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "profitPerc",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "designPrefix",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170603154452",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "design",
+    "pagination": "pagination"
+}

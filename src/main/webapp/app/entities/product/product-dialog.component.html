@@ -1,0 +1,75 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProductLabel" jhiTranslate="jPosApp.product.home.createOrEditLabel">Create or edit a Product</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!product.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="product.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.product.productDescription" for="field_productDescription">Product Description</label>
+            <input type="text" class="form-control" name="productDescription" id="field_productDescription"
+                [(ngModel)]="product.productDescription"
+            required minlength="5" maxlength="55" />
+            <div [hidden]="!(editForm.controls.productDescription?.dirty && editForm.controls.productDescription?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.productDescription?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.productDescription?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 5 }">
+                   This field is required to be at least 5 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.productDescription?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 55 }">
+                   This field cannot be longer than 55 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.product.prodCode" for="field_prodCode">Prod Code</label>
+            <input type="text" class="form-control" name="prodCode" id="field_prodCode"
+                [(ngModel)]="product.prodCode"
+            required />
+            <div [hidden]="!(editForm.controls.prodCode?.dirty && editForm.controls.prodCode?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.prodCode?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.product.profitPerc" for="field_profitPerc">Profit Perc</label>
+            <input type="number" class="form-control" name="profitPerc" id="field_profitPerc"
+                [(ngModel)]="product.profitPerc"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.product.productPrefix" for="field_productPrefix">Product Prefix</label>
+            <input type="text" class="form-control" name="productPrefix" id="field_productPrefix"
+                [(ngModel)]="product.productPrefix"
+            required />
+            <div [hidden]="!(editForm.controls.productPrefix?.dirty && editForm.controls.productPrefix?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.productPrefix?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
