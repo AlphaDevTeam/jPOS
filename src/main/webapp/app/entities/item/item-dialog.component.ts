@@ -46,13 +46,16 @@ export class ItemDialogComponent implements OnInit {
         this.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
         this.productService.query()
             .subscribe((res: ResponseWrapper) => { this.products = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.designService.query()
-            .subscribe((res: ResponseWrapper) => { this.designs = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.locationService.query()
             .subscribe((res: ResponseWrapper) => { this.locations = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
     clear() {
         this.activeModal.dismiss('cancel');
+    }
+
+    getDesignsByProduct(prodid: number) {
+        this.designService.findByProduct(prodid)
+            .subscribe((res: ResponseWrapper) => { this.designs = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     save() {

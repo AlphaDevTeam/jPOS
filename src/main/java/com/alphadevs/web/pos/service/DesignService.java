@@ -1,6 +1,7 @@
 package com.alphadevs.web.pos.service;
 
 import com.alphadevs.web.pos.domain.Design;
+import com.alphadevs.web.pos.domain.Product;
 import com.alphadevs.web.pos.repository.DesignRepository;
 import com.alphadevs.web.pos.repository.search.DesignSearchRepository;
 import org.slf4j.Logger;
@@ -22,7 +23,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class DesignService {
 
     private final Logger log = LoggerFactory.getLogger(DesignService.class);
-    
+
     private final DesignRepository designRepository;
 
     private final DesignSearchRepository designSearchRepository;
@@ -47,7 +48,7 @@ public class DesignService {
 
     /**
      *  Get all the designs.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -95,4 +96,19 @@ public class DesignService {
         Page<Design> result = designSearchRepository.search(queryStringQuery(query), pageable);
         return result;
     }
+
+    /**
+     *  Get all the designs by Product.
+     *
+     *  @param pageable the pagination information
+     *  @param product the Product
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public Page<Design> findAllByRelatedProduct(Pageable pageable, Product product) {
+        log.debug("Request to get all Designs by Product");
+        Page<Design> result = designRepository.findAllByRelatedProduct(pageable,product);
+        return result;
+    }
+
 }

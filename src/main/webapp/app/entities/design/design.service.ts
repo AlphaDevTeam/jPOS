@@ -9,6 +9,7 @@ import { ResponseWrapper, createRequestOption } from '../../shared';
 export class DesignService {
 
     private resourceUrl = 'api/designs';
+    private resourceUrlByProducts = 'api//designs/product';
     private resourceSearchUrl = 'api/_search/designs';
 
     constructor(private http: Http) { }
@@ -32,6 +33,11 @@ export class DesignService {
             return res.json();
         });
     }
+
+     findByProduct(productid: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrlByProducts}/?id=${productid}`)
+            .map((res: Response) => this.convertResponse(res));
+     }
 
     query(req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);

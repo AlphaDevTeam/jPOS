@@ -1,5 +1,6 @@
 package com.alphadevs.web.pos.web.rest;
 
+import com.alphadevs.web.pos.domain.Product;
 import com.codahale.metrics.annotation.Timed;
 import com.alphadevs.web.pos.domain.Design;
 import com.alphadevs.web.pos.service.DesignService;
@@ -36,7 +37,7 @@ public class DesignResource {
     private final Logger log = LoggerFactory.getLogger(DesignResource.class);
 
     private static final String ENTITY_NAME = "design";
-        
+
     private final DesignService designService;
 
     public DesignResource(DesignService designService) {
@@ -101,6 +102,22 @@ public class DesignResource {
     }
 
     /**
+     * GET  /designs/product/:product : get all the designs.
+     *
+     * @param pageable the pagination information
+     * @param product the Product
+     * @return the ResponseEntity with status 200 (OK) and the list of designs in body
+     */
+    @GetMapping("/designs/product")
+    @Timed
+    public ResponseEntity<List<Design>> geDesignsByProduct(@ApiParam Pageable pageable,Product product) {
+        log.debug("REST request to get a page of Designs by Products");
+        Page<Design> page = designService.findAllByRelatedProduct(pageable,product);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/designs/product");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
      * GET  /designs/:id : get the "id" design.
      *
      * @param id the id of the design to retrieve
@@ -132,7 +149,7 @@ public class DesignResource {
      * SEARCH  /_search/designs?query=:query : search for the design corresponding
      * to the query.
      *
-     * @param query the query of the design search 
+     * @param query the query of the design search
      * @param pageable the pagination information
      * @return the result of the search
      */

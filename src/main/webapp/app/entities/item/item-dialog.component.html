@@ -103,7 +103,7 @@
 
         <div class="form-group">
             <label jhiTranslate="jPosApp.item.relatedProduct" for="field_relatedProduct">Related Product</label>
-            <select class="form-control" id="field_relatedProduct" name="relatedProduct" [(ngModel)]="item.relatedProduct"  required>
+            <select class="form-control" id="field_relatedProduct" name="relatedProduct" [(ngModel)]="item.relatedProduct" (ngModelChange)="getDesignsByProduct(item.relatedProduct?.id)"  required>
                 <option [ngValue]="productOption.id === item.relatedProduct?.id ? item.relatedProduct : productOption" *ngFor="let productOption of products; trackBy: trackProductById">{{productOption.prodCode}}</option>
             </select>
         </div>
