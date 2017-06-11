@@ -1,0 +1,37 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "stockLocation",
+            "otherEntityName": "location",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "locationCode"
+        },
+        {
+            "relationshipName": "stockItem",
+            "otherEntityName": "item",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "itemCode"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "stockQty",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170604114914",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "stock",
+    "pagination": "pagination"
+}

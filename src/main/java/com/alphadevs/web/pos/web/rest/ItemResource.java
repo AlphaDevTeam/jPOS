@@ -1,5 +1,7 @@
 package com.alphadevs.web.pos.web.rest;
 
+import com.alphadevs.web.pos.domain.Stock;
+import com.alphadevs.web.pos.service.StockService;
 import com.codahale.metrics.annotation.Timed;
 import com.alphadevs.web.pos.domain.Item;
 import com.alphadevs.web.pos.service.ItemService;
@@ -17,14 +19,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Item.
@@ -36,11 +36,13 @@ public class ItemResource {
     private final Logger log = LoggerFactory.getLogger(ItemResource.class);
 
     private static final String ENTITY_NAME = "item";
-        
-    private final ItemService itemService;
 
-    public ItemResource(ItemService itemService) {
+    private final ItemService itemService;
+    private final StockService stockService;
+
+    public ItemResource(ItemService itemService, StockService stockService) {
         this.itemService = itemService;
+        this.stockService = stockService;
     }
 
     /**
@@ -57,7 +59,12 @@ public class ItemResource {
         if (item.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new item cannot already have an ID")).body(null);
         }
+        Stock stock = new Stock();
+        stock.setStockItem(item);
+        stock.setStockLocation(item.getItemLocation());
+        stock.setStockQty(new BigDecimal(0));
         Item result = itemService.save(item);
+        stockService.save(stock);
         return ResponseEntity.created(new URI("/api/items/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -132,7 +139,7 @@ public class ItemResource {
      * SEARCH  /_search/items?query=:query : search for the item corresponding
      * to the query.
      *
-     * @param query the query of the item search 
+     * @param query the query of the item search
      * @param pageable the pagination information
      * @return the result of the search
      */

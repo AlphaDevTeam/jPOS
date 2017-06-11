@@ -1,0 +1,27 @@
+{
+    "jPosApp": {
+        "cashBook" : {
+            "home": {
+                "title": "Cash Books",
+                "createLabel": "Create a new Cash Book",
+                "createOrEditLabel": "Create or edit a Cash Book",
+                "search": "Search for Cash Book"
+            },
+            "created": "A new Cash Book is created with identifier {{ param }}",
+            "updated": "A Cash Book is updated with identifier {{ param }}",
+            "deleted": "A Cash Book is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Cash Book {{ id }}?"
+            },
+            "detail": {
+                "title": "Cash Book"
+            },
+            "description": "Description",
+            "crAmount": "Cr Amount",
+            "drAmount": "Dr Amount",
+            "balanceAmount": "Balance Amount",
+            "relatedDate": "Related Date",
+            "relatedLocation": "Related Location"
+        }
+    }
+}

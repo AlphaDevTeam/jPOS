@@ -1,0 +1,65 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myStockLabel" jhiTranslate="jPosApp.stock.home.createOrEditLabel">Create or edit a Stock</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!stock.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="stock.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.stock.stockQty" for="field_stockQty">Stock Qty</label>
+            <input type="number" class="form-control" name="stockQty" id="field_stockQty"
+                [(ngModel)]="stock.stockQty"
+            required />
+            <div [hidden]="!(editForm.controls.stockQty?.dirty && editForm.controls.stockQty?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.stockQty?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.stockQty?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="jPosApp.stock.stockLocation" for="field_stockLocation">Stock Location</label>
+            <select class="form-control" id="field_stockLocation" name="stockLocation" [(ngModel)]="stock.stockLocation"  required>
+                <option [ngValue]="locationOption.id === stock.stockLocation?.id ? stock.stockLocation : locationOption" *ngFor="let locationOption of locations; trackBy: trackLocationById">{{locationOption.locationCode}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.stockLocation?.dirty && editForm.controls.stockLocation?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.stockLocation?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="jPosApp.stock.stockItem" for="field_stockItem">Stock Item</label>
+            <select class="form-control" id="field_stockItem" name="stockItem" [(ngModel)]="stock.stockItem"  required>
+                <option [ngValue]="itemOption.id === stock.stockItem?.id ? stock.stockItem : itemOption" *ngFor="let itemOption of items; trackBy: trackItemById">{{itemOption.itemCode}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.stockItem?.dirty && editForm.controls.stockItem?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.stockItem?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,47 @@
+
+<div *ngIf="cashBook">
+    <h2><span jhiTranslate="jPosApp.cashBook.detail.title">Cash Book</span> {{cashBook.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jPosApp.cashBook.description">Description</span></dt>
+        <dd>
+            <span>{{cashBook.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.cashBook.crAmount">Cr Amount</span></dt>
+        <dd>
+            <span>{{cashBook.crAmount}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.cashBook.drAmount">Dr Amount</span></dt>
+        <dd>
+            <span>{{cashBook.drAmount}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.cashBook.balanceAmount">Balance Amount</span></dt>
+        <dd>
+            <span>{{cashBook.balanceAmount}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.cashBook.relatedDate">Related Date</span></dt>
+        <dd>
+            <span>{{cashBook.relatedDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.cashBook.relatedLocation">Related Location</span></dt>
+        <dd>
+            <div *ngIf="cashBook.relatedLocation">
+                <a [routerLink]="['/location', cashBook.relatedLocation?.id]">{{cashBook.relatedLocation?.locationCode}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'cash-book/'+ cashBook.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

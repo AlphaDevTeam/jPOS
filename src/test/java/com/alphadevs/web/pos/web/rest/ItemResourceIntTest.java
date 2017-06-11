@@ -92,7 +92,7 @@ public class ItemResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        ItemResource itemResource = new ItemResource(itemService);
+        ItemResource itemResource = new ItemResource(itemService, stockService);
         this.restItemMockMvc = MockMvcBuilders.standaloneSetup(itemResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

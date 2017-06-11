@@ -1,0 +1,37 @@
+
+<div *ngIf="stock">
+    <h2><span jhiTranslate="jPosApp.stock.detail.title">Stock</span> {{stock.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jPosApp.stock.stockQty">Stock Qty</span></dt>
+        <dd>
+            <span>{{stock.stockQty}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.stock.stockLocation">Stock Location</span></dt>
+        <dd>
+            <div *ngIf="stock.stockLocation">
+                <a [routerLink]="['/location', stock.stockLocation?.id]">{{stock.stockLocation?.locationCode}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.stock.stockItem">Stock Item</span></dt>
+        <dd>
+            <div *ngIf="stock.stockItem">
+                <a [routerLink]="['/item', stock.stockItem?.id]">{{stock.stockItem?.itemCode}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'stock/'+ stock.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,108 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCashBookLabel" jhiTranslate="jPosApp.cashBook.home.createOrEditLabel">Create or edit a Cash Book</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!cashBook.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="cashBook.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.cashBook.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="cashBook.description"
+            required />
+            <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.cashBook.crAmount" for="field_crAmount">Cr Amount</label>
+            <input type="number" class="form-control" name="crAmount" id="field_crAmount"
+                [(ngModel)]="cashBook.crAmount"
+            required />
+            <div [hidden]="!(editForm.controls.crAmount?.dirty && editForm.controls.crAmount?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.crAmount?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.crAmount?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.cashBook.drAmount" for="field_drAmount">Dr Amount</label>
+            <input type="number" class="form-control" name="drAmount" id="field_drAmount"
+                [(ngModel)]="cashBook.drAmount"
+            required />
+            <div [hidden]="!(editForm.controls.drAmount?.dirty && editForm.controls.drAmount?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.drAmount?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.drAmount?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.cashBook.balanceAmount" for="field_balanceAmount">Balance Amount</label>
+            <input type="number" class="form-control" name="balanceAmount" id="field_balanceAmount"
+                [(ngModel)]="cashBook.balanceAmount"
+            required />
+            <div [hidden]="!(editForm.controls.balanceAmount?.dirty && editForm.controls.balanceAmount?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.balanceAmount?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.balanceAmount?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.cashBook.relatedDate" for="field_relatedDate">Related Date</label>
+            <div class="input-group">
+                <input id="field_relatedDate" type="text" class="form-control" name="relatedDate" ngbDatepicker  #relatedDateDp="ngbDatepicker" [(ngModel)]="cashBook.relatedDate"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="relatedDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.relatedDate?.dirty && editForm.controls.relatedDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.relatedDate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="jPosApp.cashBook.relatedLocation" for="field_relatedLocation">Related Location</label>
+            <select class="form-control" id="field_relatedLocation" name="relatedLocation" [(ngModel)]="cashBook.relatedLocation" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="locationOption.id === cashBook.relatedLocation?.id ? cashBook.relatedLocation : locationOption" *ngFor="let locationOption of locations; trackBy: trackLocationById">{{locationOption.locationCode}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

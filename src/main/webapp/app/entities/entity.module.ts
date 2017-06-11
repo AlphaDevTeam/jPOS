@@ -8,6 +8,8 @@ import { JPosCustomerCategoryModule } from './customer-category/customer-categor
 import { JPosCustomerModule } from './customer/customer.module';
 import { JPosLocationModule } from './location/location.module';
 import { JPosItemModule } from './item/item.module';
+import { JPosStockModule } from './stock/stock.module';
+import { JPosCashBookModule } from './cash-book/cash-book.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -20,6 +22,8 @@ import { JPosItemModule } from './item/item.module';
         JPosCustomerModule,
         JPosLocationModule,
         JPosItemModule,
+        JPosStockModule,
+        JPosCashBookModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

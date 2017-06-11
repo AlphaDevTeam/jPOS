@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { Item } from './item.model';
+import { Stock } from '../stock/stock.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 
 @Injectable()
@@ -15,6 +16,7 @@ export class ItemService {
 
     create(item: Item): Observable<Item> {
         const copy = this.convert(item);
+
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
