@@ -15,11 +15,15 @@
     <include file="classpath:config/liquibase/changelog/20170603200920_added_entity_Item.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170604114914_added_entity_Stock.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170611135514_added_entity_CashBook.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170611141144_added_entity_CashBookBalance.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170611142905_added_entity_CashPaymentVoucher.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="classpath:config/liquibase/changelog/20170603154452_added_entity_constraints_Design.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170603170322_added_entity_constraints_Customer.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170603200920_added_entity_constraints_Item.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170604114914_added_entity_constraints_Stock.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20170611135514_added_entity_constraints_CashBook.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170611141144_added_entity_constraints_CashBookBalance.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20170611142905_added_entity_constraints_CashPaymentVoucher.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

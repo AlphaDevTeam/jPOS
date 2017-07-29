@@ -1,0 +1,53 @@
+
+<div *ngIf="cashPaymentVoucher">
+    <h2><span jhiTranslate="jPosApp.cashPaymentVoucher.detail.title">Cash Payment Voucher</span> {{cashPaymentVoucher.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jPosApp.cashPaymentVoucher.paymentNumber">Payment Number</span></dt>
+        <dd>
+            <span>{{cashPaymentVoucher.paymentNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.cashPaymentVoucher.paymentRefNumber">Payment Ref Number</span></dt>
+        <dd>
+            <span>{{cashPaymentVoucher.paymentRefNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.cashPaymentVoucher.description">Description</span></dt>
+        <dd>
+            <span>{{cashPaymentVoucher.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.cashPaymentVoucher.paymentDate">Payment Date</span></dt>
+        <dd>
+            <span>{{cashPaymentVoucher.paymentDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.cashPaymentVoucher.paymentAmount">Payment Amount</span></dt>
+        <dd>
+            <span>{{cashPaymentVoucher.paymentAmount}}</span>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.cashPaymentVoucher.relatedLocation">Related Location</span></dt>
+        <dd>
+            <div *ngIf="cashPaymentVoucher.relatedLocation">
+                <a [routerLink]="['/location', cashPaymentVoucher.relatedLocation?.id]">{{cashPaymentVoucher.relatedLocation?.locationCode}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="jPosApp.cashPaymentVoucher.relatedCustomer">Related Customer</span></dt>
+        <dd>
+            <div *ngIf="cashPaymentVoucher.relatedCustomer">
+                <a [routerLink]="['/customer', cashPaymentVoucher.relatedCustomer?.id]">{{cashPaymentVoucher.relatedCustomer?.custCode}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'cash-payment-voucher/'+ cashPaymentVoucher.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

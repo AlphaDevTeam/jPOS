@@ -10,6 +10,8 @@ import { JPosLocationModule } from './location/location.module';
 import { JPosItemModule } from './item/item.module';
 import { JPosStockModule } from './stock/stock.module';
 import { JPosCashBookModule } from './cash-book/cash-book.module';
+import { JPosCashBookBalanceModule } from './cash-book-balance/cash-book-balance.module';
+import { JPosCashPaymentVoucherModule } from './cash-payment-voucher/cash-payment-voucher.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -24,6 +26,8 @@ import { JPosCashBookModule } from './cash-book/cash-book.module';
         JPosItemModule,
         JPosStockModule,
         JPosCashBookModule,
+        JPosCashBookBalanceModule,
+        JPosCashPaymentVoucherModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

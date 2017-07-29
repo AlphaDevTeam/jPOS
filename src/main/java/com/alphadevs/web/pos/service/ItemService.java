@@ -1,8 +1,11 @@
 package com.alphadevs.web.pos.service;
 
 import com.alphadevs.web.pos.domain.Item;
+import com.alphadevs.web.pos.domain.Stock;
 import com.alphadevs.web.pos.repository.ItemRepository;
+import com.alphadevs.web.pos.repository.StockRepository;
 import com.alphadevs.web.pos.repository.search.ItemSearchRepository;
+import com.alphadevs.web.pos.repository.search.StockSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -10,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -22,14 +25,18 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class ItemService {
 
     private final Logger log = LoggerFactory.getLogger(ItemService.class);
-    
+
     private final ItemRepository itemRepository;
+    private final StockRepository stockRepository;
 
     private final ItemSearchRepository itemSearchRepository;
+    private final StockSearchRepository stockSearchRepository;
 
-    public ItemService(ItemRepository itemRepository, ItemSearchRepository itemSearchRepository) {
+    public ItemService(ItemRepository itemRepository, StockRepository stockRepository, ItemSearchRepository itemSearchRepository, StockSearchRepository stockSearchRepository) {
         this.itemRepository = itemRepository;
+        this.stockRepository = stockRepository;
         this.itemSearchRepository = itemSearchRepository;
+        this.stockSearchRepository = stockSearchRepository;
     }
 
     /**
@@ -42,12 +49,18 @@ public class ItemService {
         log.debug("Request to save Item : {}", item);
         Item result = itemRepository.save(item);
         itemSearchRepository.save(result);
+        Stock stock = new Stock();
+        stock.setStockItem(item);
+        stock.setStockLocation(item.getItemLocation());
+        stock.setStockQty(new BigDecimal(0));
+        Stock stockResult = stockRepository.save(stock);
+        stockSearchRepository.save(stockResult);
         return result;
     }
 
     /**
      *  Get all the items.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */

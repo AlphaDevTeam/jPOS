@@ -1,0 +1,28 @@
+{
+    "jPosApp": {
+        "cashPaymentVoucher" : {
+            "home": {
+                "title": "Cash Payment Vouchers",
+                "createLabel": "Crear nuevo Cash Payment Voucher",
+                "createOrEditLabel": "Crear o editar Cash Payment Voucher",
+                "search": "Search for Cash Payment Voucher"
+            },
+            "created": "Un nuevo Cash Payment Voucher ha sido creado con el identificador {{ param }}",
+            "updated": "Un Cash Payment Voucher ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Cash Payment Voucher ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Cash Payment Voucher {{ id }}?"
+            },
+            "detail": {
+                "title": "Cash Payment Voucher"
+            },
+            "paymentNumber": "Payment Number",
+            "paymentRefNumber": "Payment Ref Number",
+            "description": "Description",
+            "paymentDate": "Payment Date",
+            "paymentAmount": "Payment Amount",
+            "relatedLocation": "Related Location",
+            "relatedCustomer": "Related Customer"
+        }
+    }
+}

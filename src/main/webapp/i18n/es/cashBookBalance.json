@@ -1,0 +1,24 @@
+{
+    "jPosApp": {
+        "cashBookBalance" : {
+            "home": {
+                "title": "Cash Book Balances",
+                "createLabel": "Crear nuevo Cash Book Balance",
+                "createOrEditLabel": "Crear o editar Cash Book Balance",
+                "search": "Search for Cash Book Balance"
+            },
+            "created": "Un nuevo Cash Book Balance ha sido creado con el identificador {{ param }}",
+            "updated": "Un Cash Book Balance ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Cash Book Balance ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Cash Book Balance {{ id }}?"
+            },
+            "detail": {
+                "title": "Cash Book Balance"
+            },
+            "cashBalance": "Cash Balance",
+            "bankBalance": "Bank Balance",
+            "relatedLocation": "Related Location"
+        }
+    }
+}

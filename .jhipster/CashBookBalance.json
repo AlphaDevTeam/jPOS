@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "relatedLocation",
+            "otherEntityName": "location",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "locationCode"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "cashBalance",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "bankBalance",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170611141144",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "cash_book_balance",
+    "pagination": "pagination"
+}

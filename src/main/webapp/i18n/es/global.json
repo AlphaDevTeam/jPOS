@@ -17,6 +17,8 @@
                 "item": "Item",
                 "stock": "Stock",
                 "cashBook": "Cash Book",
+                "cashBookBalance": "Cash Book Balance",
+                "cashPaymentVoucher": "Cash Payment Voucher",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

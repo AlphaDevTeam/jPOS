@@ -1,0 +1,111 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCashPaymentVoucherLabel" jhiTranslate="jPosApp.cashPaymentVoucher.home.createOrEditLabel">Create or edit a Cash Payment Voucher</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!cashPaymentVoucher.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="cashPaymentVoucher.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.cashPaymentVoucher.paymentNumber" for="field_paymentNumber">Payment Number</label>
+            <input type="text" class="form-control" name="paymentNumber" id="field_paymentNumber"
+                [(ngModel)]="cashPaymentVoucher.paymentNumber"
+            required />
+            <div [hidden]="!(editForm.controls.paymentNumber?.dirty && editForm.controls.paymentNumber?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.paymentNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.cashPaymentVoucher.paymentRefNumber" for="field_paymentRefNumber">Payment Ref Number</label>
+            <input type="text" class="form-control" name="paymentRefNumber" id="field_paymentRefNumber"
+                [(ngModel)]="cashPaymentVoucher.paymentRefNumber"
+             />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.cashPaymentVoucher.description" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="cashPaymentVoucher.description"
+            required />
+            <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.description?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.cashPaymentVoucher.paymentDate" for="field_paymentDate">Payment Date</label>
+            <div class="input-group">
+                <input id="field_paymentDate" type="text" class="form-control" name="paymentDate" ngbDatepicker  #paymentDateDp="ngbDatepicker" [(ngModel)]="cashPaymentVoucher.paymentDate"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" (click)="paymentDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.paymentDate?.dirty && editForm.controls.paymentDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.paymentDate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jPosApp.cashPaymentVoucher.paymentAmount" for="field_paymentAmount">Payment Amount</label>
+            <input type="number" class="form-control" name="paymentAmount" id="field_paymentAmount"
+                [(ngModel)]="cashPaymentVoucher.paymentAmount"
+            required />
+            <div [hidden]="!(editForm.controls.paymentAmount?.dirty && editForm.controls.paymentAmount?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.paymentAmount?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.paymentAmount?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="jPosApp.cashPaymentVoucher.relatedLocation" for="field_relatedLocation">Related Location</label>
+            <select class="form-control" id="field_relatedLocation" name="relatedLocation" [(ngModel)]="cashPaymentVoucher.relatedLocation"  required>
+                <option [ngValue]="locationOption.id === cashPaymentVoucher.relatedLocation?.id ? cashPaymentVoucher.relatedLocation : locationOption" *ngFor="let locationOption of locations; trackBy: trackLocationById">{{locationOption.locationCode}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.relatedLocation?.dirty && editForm.controls.relatedLocation?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.relatedLocation?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="jPosApp.cashPaymentVoucher.relatedCustomer" for="field_relatedCustomer">Related Customer</label>
+            <select class="form-control" id="field_relatedCustomer" name="relatedCustomer" [(ngModel)]="cashPaymentVoucher.relatedCustomer"  required>
+                <option [ngValue]="customerOption.id === cashPaymentVoucher.relatedCustomer?.id ? cashPaymentVoucher.relatedCustomer : customerOption" *ngFor="let customerOption of customers; trackBy: trackCustomerById">{{customerOption.custCode}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.relatedCustomer?.dirty && editForm.controls.relatedCustomer?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.relatedCustomer?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
